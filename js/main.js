@@ -12,8 +12,14 @@ $(function () {
     var apiurl = baseurl.val();
     var user=username.val();
     var password=pass.val();
-    var fullUrl =`https://${user}:${password}@${apiurl}/api/app/packagemanager/packages`;
-    $.get(fullUrl)
+    var fullUrl =`https://${apiurl}/api/app/packagemanager/packages`;
+    $.ajax({
+      type: "GET",
+      dataType: 'json',
+      url: fullUrl,
+      username: user,
+      password: password
+    })
       .done(function (json) {
         result.text(json.title).appendTo("body");
       })
