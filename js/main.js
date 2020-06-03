@@ -3,11 +3,16 @@ $(function () {
   var go = $("#go");
   var result = $("#result");
   var baseurl = $("#baseurl");
+  var username = $("#username");
+  var pass = $("#pass");
+
   loading.hide();
   go.on("click", function (event) {
     loading.show();
     var apiurl = baseurl.val();
-    var fullUrl = apiurl + "/api/app/packagemanager/packages";
+    var user=username.val();
+    var password=pass.val();
+    var fullUrl =`https://${user}:${password}@${apiurl}/api/app/packagemanager/packages`;
     $.get(fullUrl)
       .done(function (json) {
         result.text(json.title).appendTo("body");
