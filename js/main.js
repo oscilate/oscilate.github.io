@@ -17,8 +17,9 @@ $(function () {
       type: "GET",
       dataType: 'json',
       url: fullUrl,
-      username: user,
-      password: password
+      headers: {
+        "Authorization": "Basic " + btoa(user + ":" + password)
+      },
     })
       .done(function (json) {
         result.text(json.title).appendTo("body");
